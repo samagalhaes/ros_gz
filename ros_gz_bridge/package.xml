@@ -23,6 +23,7 @@
   <depend>std_msgs</depend>
   <depend>tf2_msgs</depend>
   <depend>trajectory_msgs</depend>
+  <depend>vision_msgs</depend>
   <depend>yaml_cpp_vendor</depend>
 
   <!-- Garden -->
