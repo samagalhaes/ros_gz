@@ -12,17 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ROS_GZ_BRIDGE__CONVERT_HPP_
-#define ROS_GZ_BRIDGE__CONVERT_HPP_
+#ifndef FACTORIES__VISION_MSGS_HPP_
+#define FACTORIES__VISION_MSGS_HPP_
+#include <memory>
+#include <string>
 
-#include <ros_gz_bridge/convert/geometry_msgs.hpp>
-#include <ros_gz_bridge/convert/nav_msgs.hpp>
-#include <ros_gz_bridge/convert/ros_gz_interfaces.hpp>
-#include <ros_gz_bridge/convert/rosgraph_msgs.hpp>
-#include <ros_gz_bridge/convert/sensor_msgs.hpp>
-#include <ros_gz_bridge/convert/std_msgs.hpp>
-#include <ros_gz_bridge/convert/tf2_msgs.hpp>
-#include <ros_gz_bridge/convert/trajectory_msgs.hpp>
-#include <ros_gz_bridge/convert/vision_msgs.hpp>
+#include "factory_interface.hpp"
 
-#endif  // ROS_GZ_BRIDGE__CONVERT_HPP_
+namespace ros_gz_bridge
+{
+
+std::shared_ptr<FactoryInterface>
+get_factory__vision_msgs(
+  const std::string & ros_type_name,
+  const std::string & gz_type_name);
+
+}  // namespace ros_gz_bridge
+
+#endif  // FACTORIES__VISION_MSGS_HPP_
