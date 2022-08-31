@@ -22,6 +22,7 @@
   <depend>std_msgs</depend>
   <depend>tf2_msgs</depend>
   <depend>trajectory_msgs</depend>
+  <depend>vision_msgs</depend>
 
   <!-- Garden -->
   <depend condition="$GZ_VERSION == garden or $IGNITION_VERSION == garden">gz-msgs9</depend>

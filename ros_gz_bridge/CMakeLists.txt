@@ -21,6 +21,7 @@ find_package(sensor_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(tf2_msgs REQUIRED)
 find_package(trajectory_msgs REQUIRED)
+find_package(vision_msgs REQUIRED)
 
 # TODO(CH3): Deprecated. Remove on tock.
 if("$ENV{GZ_VERSION}" STREQUAL "" AND NOT "$ENV{IGNITION_VERSION}" STREQUAL "")
@@ -73,6 +74,7 @@ set(PACKAGES
   std_msgs
   tf2_msgs
   trajectory_msgs
+  vision_msgs
 )
 
 add_library(bridge_utils
@@ -196,6 +198,7 @@ if(BUILD_TESTING)
     std_msgs
     tf2_msgs
     trajectory_msgs
+    vision_msgs
   )
 
   add_executable(test_ros_publisher test/publishers/ros_publisher.cpp)

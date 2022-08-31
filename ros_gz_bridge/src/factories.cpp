@@ -26,6 +26,7 @@
 #include "factories/std_msgs.hpp"
 #include "factories/tf2_msgs.hpp"
 #include "factories/trajectory_msgs.hpp"
+#include "factories/vision_msgs.hpp"
 
 #include "service_factories/ros_gz_interfaces.hpp"
 
@@ -63,6 +64,9 @@ get_factory_impl(
   if (impl) {return impl;}
 
   impl = get_factory__trajectory_msgs(ros_type_name, gz_type_name);
+  if (impl) {return impl;}
+
+  impl = get_factory__vision_msgs(ros_type_name, gz_type_name);
   if (impl) {return impl;}
 
   return nullptr;
