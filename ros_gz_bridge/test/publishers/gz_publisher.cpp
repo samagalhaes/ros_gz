@@ -275,6 +275,22 @@ int main(int /*argc*/, char **/*argv*/)
   ignition::msgs::VideoRecord video_record_msg;
   ros_gz_bridge::testing::createTestMsg(video_record_msg);
 
+  // gz::msgs::Oriented3DBox.
+  auto oriented_3d_box_pub = node.Advertise<ignition::msgs::Oriented3DBox>("oriented_3d_box");
+  ignition::msgs::Oriented3DBox oriented_3d_box_msg;
+  ros_gz_bridge::testing::createTestMsg(oriented_3d_box_msg);
+
+  // gz::msgs::AnnotatedOriented3DBox.
+  auto annotated_oriented_3d_box_pub = node.Advertise<ignition::msgs::AnnotatedOriented3DBox>("annotated_oriented_3d_box");
+  ignition::msgs::AnnotatedOriented3DBox annotated_oriented_3d_box_msg;
+  ros_gz_bridge::testing::createTestMsg(annotated_oriented_3d_box_msg);
+
+  // gz::msgs::AnnotatedOriented3DBox.
+  auto annotated_oriented_3d_box_v_pub = node.Advertise<ignition::msgs::AnnotatedOriented3DBox_V>("annotated_oriented_3d_box_v");
+  ignition::msgs::AnnotatedOriented3DBox_V annotated_oriented_3d_box_v_msg;
+  ros_gz_bridge::testing::createTestMsg(annotated_oriented_3d_box_v_msg);
+
+
   // Publish messages at 100Hz.
   while (!g_terminatePub) {
     color_pub.Publish(color_msg);
@@ -321,6 +337,9 @@ int main(int /*argc*/, char **/*argv*/)
     time_pub.Publish(time_msg);
     track_visual_pub.Publish(track_visual_msg);
     video_record_pub.Publish(video_record_msg);
+    oriented_3d_box_pub.Publish(oriented_3d_box_msg);
+    annotated_oriented_3d_box_pub.Publish(annotated_oriented_3d_box_msg);
+    annotated_oriented_3d_box_v_pub.Publish(annotated_oriented_3d_box_v_msg);
 
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
