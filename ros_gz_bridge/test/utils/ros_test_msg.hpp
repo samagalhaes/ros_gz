@@ -69,6 +69,9 @@
 #include <tf2_msgs/msg/tf_message.hpp>
 #include <trajectory_msgs/msg/joint_trajectory.hpp>
 #include <rcl_interfaces/msg/parameter_value.hpp>
+#include <vision_msgs/msg/bounding_box3_d.hpp>
+#include <vision_msgs/msg/detection3_d.hpp>
+#include <vision_msgs/msg/detection3_d_array.hpp>
 
 namespace ros_gz_bridge
 {
@@ -506,6 +509,32 @@ void createTestMsg(rcl_interfaces::msg::ParameterValue & _msg);
 /// \brief Compare a message with the populated for testing.
 /// \param[in] _msg The message to compare.
 void compareTestMsg(const std::shared_ptr<rcl_interfaces::msg::ParameterValue> & _msg);
+
+/// vision_msgs
+
+/// \brief Create a message used for testing.
+/// \param[out] _msg The message populated.
+void createTestMsg(vision_msgs::msg::BoundingBox3D & _msg);
+
+/// \brief Compare a message with the populated for testing.
+/// \param[in] _msg The message to compare.
+void compareTestMsg(const std::shared_ptr<vision_msgs::msg::BoundingBox3D> & _msg);
+
+/// \brief Create a message used for testing.
+/// \param[out] _msg The message populated.
+void createTestMsg(vision_msgs::msg::Detection3D & _msg);
+
+/// \brief Compare a message with the populated for testing.
+/// \param[in] _msg The message to compare.
+void compareTestMsg(const std::shared_ptr<vision_msgs::msg::Detection3D> & _msg);
+
+/// \brief Create a message used for testing.
+/// \param[out] _msg The message populated.
+void createTestMsg(vision_msgs::msg::Detection3DArray & _msg);
+
+/// \brief Compare a message with the populated for testing.
+/// \param[in] _msg The message to compare.
+void compareTestMsg(const std::shared_ptr<vision_msgs::msg::Detection3DArray> & _msg);
 
 }  // namespace testing
 }  // namespace ros_gz_bridge
