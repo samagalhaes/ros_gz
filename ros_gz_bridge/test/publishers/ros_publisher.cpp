@@ -278,6 +278,24 @@ int main(int argc, char ** argv)
   trajectory_msgs::msg::JointTrajectory joint_trajectory_msg;
   ros_gz_bridge::testing::createTestMsg(joint_trajectory_msg);
 
+  // vision::msg::BoundindBox3D.
+  auto bounding_box_3d_pub =
+    node->create_publisher<vision_msgs::msg::BoundingBox3D>("bounding_box_3d", 1);
+  vision_msgs::msg::BoundingBox3D bounding_box_3d_msg;
+  ros_gz_bridge::testing::createTestMsg(bounding_box_3d_msg);
+
+  // vision::msg::Detection3D.
+  auto detection_3d_pub =
+    node->create_publisher<vision_msgs::msg::Detection3D>("detection_3d", 1);
+  vision_msgs::msg::Detection3D detection_3d_msg;
+  ros_gz_bridge::testing::createTestMsg(detection_3d_msg);
+
+  // vision::msg::Detection3DArray.
+  auto detection_3d_array_pub =
+    node->create_publisher<vision_msgs::msg::Detection3DArray>("detection_3d_array", 1);
+  vision_msgs::msg::Detection3DArray detection_3d_array_msg;
+  ros_gz_bridge::testing::createTestMsg(detection_3d_array_msg);
+
   while (rclcpp::ok()) {
     // Publish all messages.
     time_pub->publish(time_msg);
@@ -324,6 +342,9 @@ int main(int argc, char ** argv)
     stringmsg_v_pub->publish(stringmsg_v_msg);
     track_visual_pub->publish(track_visual_msg);
     video_record_pub->publish(video_record_msg);
+    bounding_box_3d_pub->publish(bounding_box_3d_msg);
+    detection_3d_pub->publish(detection_3d_msg);
+    detection_3d_array_pub->publish(detection_3d_array_msg);
 
     rclcpp::spin_some(node);
     loop_rate.sleep();

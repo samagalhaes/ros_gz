@@ -1225,5 +1225,114 @@ void compareTestMsg(const std::shared_ptr<ignition::msgs::VideoRecord> & _msg)
   EXPECT_EQ(expected_msg.save_filename(), _msg->save_filename());
 }
 
+void createTestMsg(ignition::msgs::Oriented3DBox & _msg)
+{
+  createTestMsg(*_msg.mutable_header());
+  createTestMsg(*_msg.mutable_center());
+  createTestMsg(*_msg.mutable_orientation());
+  createTestMsg(*_msg.mutable_boxsize());
+}
+
+void compareTestMsg(const std::shared_ptr<ignition::msgs::Oriented3DBox> & _msg)
+{
+  if (_msg->header().data_size() > 0) {
+    compareTestMsg(std::make_shared<ignition::msgs::Header>(_msg->header()));
+
+    ignition::msgs::Oriented3DBox expected_msg;
+    createTestMsg(expected_msg);
+
+    if (_msg->header().data_size() > 2) {
+      // child_frame_id
+      ASSERT_EQ(3, expected_msg.header().data_size());
+      ASSERT_EQ(3, _msg->header().data_size());
+      EXPECT_EQ(
+        expected_msg.header().data(2).key(),
+        _msg->header().data(2).key());
+      EXPECT_EQ(1, _msg->header().data(2).value_size());
+      EXPECT_EQ(
+        expected_msg.header().data(2).value(0),
+        _msg->header().data(2).value(0));
+    }
+  }
+  compareTestMsg(std::make_shared<ignition::msgs::Vector3d>(_msg->center()));
+  compareTestMsg(std::make_shared<ignition::msgs::Quaternion>(_msg->orientation()));
+  compareTestMsg(std::make_shared<ignition::msgs::Vector3d>(_msg->boxsize()));
+}
+
+void createTestMsg(ignition::msgs::AnnotatedOriented3DBox & _msg)
+{
+  createTestMsg(*_msg.mutable_header());
+  createTestMsg(*_msg.mutable_box());
+  _msg.set_label(31);
+}
+
+void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedOriented3DBox> & _msg)
+{
+  if (_msg->header().data_size() > 0) {
+    compareTestMsg(std::make_shared<ignition::msgs::Header>(_msg->header()));
+
+    ignition::msgs::AnnotatedOriented3DBox expected_msg;
+    createTestMsg(expected_msg);
+
+    if (_msg->header().data_size() > 2) {
+      // child_frame_id
+      ASSERT_EQ(3, expected_msg.header().data_size());
+      ASSERT_EQ(3, _msg->header().data_size());
+      EXPECT_EQ(
+        expected_msg.header().data(2).key(),
+        _msg->header().data(2).key());
+      EXPECT_EQ(1, _msg->header().data(2).value_size());
+      EXPECT_EQ(
+        expected_msg.header().data(2).value(0),
+        _msg->header().data(2).value(0));
+    }
+  }
+
+  ignition::msgs::AnnotatedOriented3DBox expected_msg;
+  createTestMsg(expected_msg);
+  EXPECT_EQ(expected_msg.label(), _msg->label());
+
+  compareTestMsg(std::make_shared<ignition::msgs::Oriented3DBox>(_msg->box()));
+}
+
+void createTestMsg(ignition::msgs::AnnotatedOriented3DBox_V & _msg)
+{
+  createTestMsg(*_msg.mutable_header());
+  for(int i=0; i < 100; i++){
+    auto annotated_box = _msg.add_annotated_box();
+    createTestMsg(*annotated_box);
+  }
+}
+
+void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedOriented3DBox_V> & _msg)
+{
+  if (_msg->header().data_size() > 0) {
+    compareTestMsg(std::make_shared<ignition::msgs::Header>(_msg->header()));
+
+    ignition::msgs::AnnotatedOriented3DBox expected_msg;
+    createTestMsg(expected_msg);
+
+    if (_msg->header().data_size() > 2) {
+      // child_frame_id
+      ASSERT_EQ(3, expected_msg.header().data_size());
+      ASSERT_EQ(3, _msg->header().data_size());
+      EXPECT_EQ(
+        expected_msg.header().data(2).key(),
+        _msg->header().data(2).key());
+      EXPECT_EQ(1, _msg->header().data(2).value_size());
+      EXPECT_EQ(
+        expected_msg.header().data(2).value(0),
+        _msg->header().data(2).value(0));
+    }
+  }
+
+  ignition::msgs::AnnotatedOriented3DBox_V expected_msg;
+  createTestMsg(expected_msg);
+  ASSERT_EQ(expected_msg.annotated_box_size(), _msg->annotated_box_size());
+  for (auto annotated_box : _msg->annotated_box()){
+    compareTestMsg(std::make_shared<ignition::msgs::AnnotatedOriented3DBox>(annotated_box));
+  }
+}
+
 }  // namespace testing
 }  // namespace ros_gz_bridge

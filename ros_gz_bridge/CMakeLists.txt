@@ -213,7 +213,8 @@ if(BUILD_TESTING)
         test/subscribers/ros_subscriber/rosgraph_msgs_subscriber.cpp
         test/subscribers/ros_subscriber/sensor_msgs_subscriber.cpp
         test/subscribers/ros_subscriber/std_msgs_subscriber.cpp
-        test/subscribers/ros_subscriber/trajectory_msgs_subscriber.cpp)
+        test/subscribers/ros_subscriber/trajectory_msgs_subscriber.cpp
+        test/subscribers/ros_subscriber/vision_msgs_subscriber.cpp)
 
   target_link_libraries(test_ros_subscriber test_utils)
 

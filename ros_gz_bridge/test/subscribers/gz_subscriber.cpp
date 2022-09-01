@@ -562,6 +562,39 @@ TEST(GzSubscriberTest, VideoRecord)
   EXPECT_TRUE(client.callbackExecuted);
 }
 
+TEST(GzSubscriberTest, Oriented3DBox)
+{
+  MyTestClass<ignition::msgs::Oriented3DBox> client("oriented_3d_box");
+
+  using namespace std::chrono_literals;
+  ros_gz_bridge::testing::waitUntilBoolVar(
+    client.callbackExecuted, 100ms, 200);
+
+  EXPECT_TRUE(client.callbackExecuted);
+}
+
+TEST(GzSubscriberTest, AnnotatedOriented3DBox)
+{
+  MyTestClass<ignition::msgs::AnnotatedOriented3DBox> client("annotated_oriented_3d_box");
+
+  using namespace std::chrono_literals;
+  ros_gz_bridge::testing::waitUntilBoolVar(
+    client.callbackExecuted, 100ms, 200);
+
+  EXPECT_TRUE(client.callbackExecuted);
+}
+
+TEST(GzSubscriberTest, AnnotatedOriented3DBox_V)
+{
+  MyTestClass<ignition::msgs::AnnotatedOriented3DBox_V> client("annotated_oriented_3d_box_v");
+
+  using namespace std::chrono_literals;
+  ros_gz_bridge::testing::waitUntilBoolVar(
+    client.callbackExecuted, 100ms, 200);
+
+  EXPECT_TRUE(client.callbackExecuted);
+}
+
 /////////////////////////////////////////////////
 int main(int argc, char ** argv)
 {
