@@ -18,23 +18,17 @@
 namespace ros_gz_bridge
 {
 
-// TODO
 template<>
 void
 convert_ros_to_gz(
   const vision_msgs::msg::BoundingBox3D & ros_msg,
   ignition::msgs::Oriented3DBox & gz_msg)
 {
-//   convert_ros_to_gz(ros_msg.header, (*gz_msg.mutable_header()));
-//   convert_ros_to_gz(ros_msg.pose.pose, (*gz_msg.mutable_pose()));
-//   convert_ros_to_gz(ros_msg.twist.twist, (*gz_msg.mutable_twist()));
-
-//   auto childFrame = gz_msg.mutable_header()->add_data();
-//   childFrame->set_key("child_frame_id");
-//   childFrame->add_value(ros_msg.child_frame_id);
+  convert_ros_to_gz(ros_msg.center.position, (*gz_msg.mutable_center()));
+  convert_ros_to_gz(ros_msg.center.orientation, (*gz_msg.mutable_orientation()));
+  convert_ros_to_gz(ros_msg.size, (*gz_msg.mutable_boxsize()));
 }
 
-// TODO
 template<>
 void
 convert_gz_to_ros(
@@ -46,40 +40,34 @@ convert_gz_to_ros(
   convert_gz_to_ros(gz_msg.boxsize(), ros_msg.size);
 }
 
-// TODO
 template<>
 void
 convert_ros_to_gz(
   const vision_msgs::msg::Detection3D & ros_msg,
   ignition::msgs::AnnotatedOriented3DBox & gz_msg)
 {
-//   convert_ros_to_gz(ros_msg.header, (*gz_msg.mutable_header()));
-//   convert_ros_to_gz(ros_msg.pose.pose, (*gz_msg.mutable_pose()));
-//   convert_ros_to_gz(ros_msg.twist.twist, (*gz_msg.mutable_twist()));
-
-//   auto childFrame = gz_msg.mutable_header()->add_data();
-//   childFrame->set_key("child_frame_id");
-//   childFrame->add_value(ros_msg.child_frame_id);
+  convert_ros_to_gz(ros_msg.header, (*gz_msg.mutable_header()));
+  convert_ros_to_gz(ros_msg.bbox, (*gz_msg.mutable_box()));
+  
+  unsigned int ros_label = std::stoi(ros_msg.results[0].hypothesis.class_id);
+  gz_msg.set_label(ros_label);
 }
 
-// TODO
 template<>
 void
 convert_gz_to_ros(
   const ignition::msgs::AnnotatedOriented3DBox & gz_msg,
   vision_msgs::msg::Detection3D & ros_msg)
 {
-//   convert_gz_to_ros(gz_msg.header(), ros_msg.header);
-//   convert_gz_to_ros(gz_msg.pose(), ros_msg.pose.pose);
-//   convert_gz_to_ros(gz_msg.twist(), ros_msg.twist.twist);
+  convert_gz_to_ros(gz_msg.header(), ros_msg.header);
+  convert_gz_to_ros(gz_msg.box(), ros_msg.bbox);
 
-//   for (auto i = 0; i < gz_msg.header().data_size(); ++i) {
-//     auto a_pair = gz_msg.header().data(i);
-//     if (a_pair.key() == "child_frame_id" && a_pair.value_size() > 0) {
-//       ros_msg.child_frame_id = frame_id_gz_to_ros(a_pair.value(0));
-//       break;
-//     }
-//   }
+  auto &object = ros_msg.results.emplace_back();
+  object.hypothesis.class_id = std::to_string(gz_msg.label());
+  object.hypothesis.score = 1;
+  convert_gz_to_ros(gz_msg.box().center(), object.pose.pose.position);
+  convert_gz_to_ros(gz_msg.box().orientation(), object.pose.pose.orientation);
+  ros_msg.results.push_back(object);
 }
 
 // TODO: Change this
@@ -89,33 +77,25 @@ convert_ros_to_gz(
   const vision_msgs::msg::Detection3DArray & ros_msg,
   ignition::msgs::AnnotatedOriented3DBox_V & gz_msg)
 {
-//   convert_ros_to_gz(ros_msg.header, (*gz_msg.mutable_header()));
-//   convert_ros_to_gz(ros_msg.pose.pose, (*gz_msg.mutable_pose()));
-//   convert_ros_to_gz(ros_msg.twist.twist, (*gz_msg.mutable_twist()));
-
-//   auto childFrame = gz_msg.mutable_header()->add_data();
-//   childFrame->set_key("child_frame_id");
-//   childFrame->add_value(ros_msg.child_frame_id);
+  convert_ros_to_gz(ros_msg.header, (*gz_msg.mutable_header()));
+  for (auto& ros_detection : ros_msg.detections){
+    ignition::msgs::AnnotatedOriented3DBox* gz_detection = gz_msg.add_annotated_box();
+    convert_ros_to_gz(ros_detection, (*gz_detection));
+  }
 }
 
-// TODO: change this
 template<>
 void
 convert_gz_to_ros(
   const ignition::msgs::AnnotatedOriented3DBox_V & gz_msg,
   vision_msgs::msg::Detection3DArray & ros_msg)
 {
-//   convert_gz_to_ros(gz_msg.header(), ros_msg.header);
-//   convert_gz_to_ros(gz_msg.pose(), ros_msg.pose.pose);
-//   convert_gz_to_ros(gz_msg.twist(), ros_msg.twist.twist);
+  convert_gz_to_ros(gz_msg.header(), ros_msg.header);
 
-//   for (auto i = 0; i < gz_msg.header().data_size(); ++i) {
-//     auto a_pair = gz_msg.header().data(i);
-//     if (a_pair.key() == "child_frame_id" && a_pair.value_size() > 0) {
-//       ros_msg.child_frame_id = frame_id_gz_to_ros(a_pair.value(0));
-//       break;
-//     }
-//   }
+  for(auto& gz_box : gz_msg.annotated_box()) {
+    auto& ros_box = ros_msg.detections.emplace_back(); 
+    convert_gz_to_ros(gz_box, ros_box);
+  }
 }
 
 }  // namespace ros_gz_bridge
