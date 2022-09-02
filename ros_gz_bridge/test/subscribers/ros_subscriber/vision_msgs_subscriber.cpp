@@ -48,7 +48,7 @@ TEST(ROSSubscriberTest, Detection3D)
 /////////////////////////////////////////////////
 TEST(ROSSubscriberTest, Detection3DArray)
 {
-  MyTestClass<vision_msgs::msg::Detection3DArray> client("detection_3d_array");
+  MyTestClass<vision_msgs::msg::Detection3DArray> client("detection_3d_v");
 
   using namespace std::chrono_literals;
   ros_gz_bridge::testing::waitUntilBoolVarAndSpin(
