@@ -48,7 +48,6 @@ convert_ros_to_gz(
 {
   convert_ros_to_gz(ros_msg.header, (*gz_msg.mutable_header()));
   convert_ros_to_gz(ros_msg.bbox, (*gz_msg.mutable_box()));
-  
   unsigned int ros_label = std::stoi(ros_msg.results[0].hypothesis.class_id);
   gz_msg.set_label(ros_label);
 }
@@ -62,11 +61,9 @@ convert_gz_to_ros(
   convert_gz_to_ros(gz_msg.header(), ros_msg.header);
   convert_gz_to_ros(gz_msg.box(), ros_msg.bbox);
 
-  auto &object = ros_msg.results.emplace_back();
+  auto & object = ros_msg.results.emplace_back();
   object.hypothesis.class_id = std::to_string(gz_msg.label());
   object.hypothesis.score = 1;
-  convert_gz_to_ros(gz_msg.box().center(), object.pose.pose.position);
-  convert_gz_to_ros(gz_msg.box().orientation(), object.pose.pose.orientation);
   ros_msg.results.push_back(object);
 }
 
@@ -77,8 +74,8 @@ convert_ros_to_gz(
   ignition::msgs::AnnotatedOriented3DBox_V & gz_msg)
 {
   convert_ros_to_gz(ros_msg.header, (*gz_msg.mutable_header()));
-  for (auto& ros_detection : ros_msg.detections){
-    ignition::msgs::AnnotatedOriented3DBox* gz_detection = gz_msg.add_annotated_box();
+  for (auto & ros_detection : ros_msg.detections) {
+    ignition::msgs::AnnotatedOriented3DBox * gz_detection = gz_msg.add_annotated_box();
     convert_ros_to_gz(ros_detection, (*gz_detection));
   }
 }
@@ -91,8 +88,8 @@ convert_gz_to_ros(
 {
   convert_gz_to_ros(gz_msg.header(), ros_msg.header);
 
-  for(auto& gz_box : gz_msg.annotated_box()) {
-    auto& ros_box = ros_msg.detections.emplace_back(); 
+  for (auto & gz_box : gz_msg.annotated_box()) {
+    auto & ros_box = ros_msg.detections.emplace_back();
     convert_gz_to_ros(gz_box, ros_box);
   }
 }
@@ -141,8 +138,9 @@ convert_ros_to_gz(
   convert_ros_to_gz(ros_msg.bbox, (*gz_msg.mutable_box()));
 
   auto result = ros_msg.results.cbegin();
-  if (result != ros_msg.results.end())
+  if (result != ros_msg.results.end()) {
     gz_msg.set_label(std::stoi(result->hypothesis.class_id));
+  }
 }
 
 template<>
@@ -154,7 +152,7 @@ convert_gz_to_ros(
   convert_gz_to_ros(gz_msg.header(), ros_msg.header);
   convert_gz_to_ros(gz_msg.box(), ros_msg.bbox);
 
-  auto& result = ros_msg.results.emplace_back();
+  auto & result = ros_msg.results.emplace_back();
   result.hypothesis.class_id = std::to_string(gz_msg.label());
   result.hypothesis.score = 1.0;
 }
@@ -166,8 +164,8 @@ convert_ros_to_gz(
   ignition::msgs::AnnotatedAxisAligned2DBox_V & gz_msg)
 {
   convert_ros_to_gz(ros_msg.header, (*gz_msg.mutable_header()));
-  for (auto& ros_detection : ros_msg.detections){
-    ignition::msgs::AnnotatedAxisAligned2DBox* gz_detection = gz_msg.add_annotated_box();
+  for (auto & ros_detection : ros_msg.detections) {
+    ignition::msgs::AnnotatedAxisAligned2DBox * gz_detection = gz_msg.add_annotated_box();
     convert_ros_to_gz(ros_detection, (*gz_detection));
   }
 }
@@ -179,8 +177,8 @@ convert_gz_to_ros(
   vision_msgs::msg::Detection2DArray & ros_msg)
 {
   convert_gz_to_ros(gz_msg.header(), ros_msg.header);
-  for (auto& gz_detection : gz_msg.annotated_box()){
-    auto& ros_detection = ros_msg.detections.emplace_back();
+  for (auto & gz_detection : gz_msg.annotated_box()) {
+    auto & ros_detection = ros_msg.detections.emplace_back();
     convert_gz_to_ros(gz_detection, ros_detection);
   }
 }

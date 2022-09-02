@@ -292,7 +292,7 @@ int main(int argc, char ** argv)
 
   // vision::msg::Detection3DArray.
   auto detection_3d_array_pub =
-    node->create_publisher<vision_msgs::msg::Detection3DArray>("detection_3d_array", 1);
+    node->create_publisher<vision_msgs::msg::Detection3DArray>("detection_3d_v", 1);
   vision_msgs::msg::Detection3DArray detection_3d_array_msg;
   ros_gz_bridge::testing::createTestMsg(detection_3d_array_msg);
 

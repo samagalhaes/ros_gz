@@ -276,17 +276,19 @@ int main(int /*argc*/, char **/*argv*/)
   ros_gz_bridge::testing::createTestMsg(video_record_msg);
 
   // gz::msgs::Oriented3DBox.
-  auto oriented_3d_box_pub = node.Advertise<ignition::msgs::Oriented3DBox>("oriented_3d_box");
+  auto oriented_3d_box_pub = node.Advertise<ignition::msgs::Oriented3DBox>("bounding_box_3d");
   ignition::msgs::Oriented3DBox oriented_3d_box_msg;
   ros_gz_bridge::testing::createTestMsg(oriented_3d_box_msg);
 
   // gz::msgs::AnnotatedOriented3DBox.
-  auto annotated_oriented_3d_box_pub = node.Advertise<ignition::msgs::AnnotatedOriented3DBox>("annotated_oriented_3d_box");
+  auto annotated_oriented_3d_box_pub = node.Advertise<ignition::msgs::AnnotatedOriented3DBox>(
+    "detection_3d");
   ignition::msgs::AnnotatedOriented3DBox annotated_oriented_3d_box_msg;
   ros_gz_bridge::testing::createTestMsg(annotated_oriented_3d_box_msg);
 
   // gz::msgs::AnnotatedOriented3DBox.
-  auto annotated_oriented_3d_box_v_pub = node.Advertise<ignition::msgs::AnnotatedOriented3DBox_V>("annotated_oriented_3d_box_v");
+  auto annotated_oriented_3d_box_v_pub = node.Advertise<ignition::msgs::AnnotatedOriented3DBox_V>(
+    "detection_3d_v");
   ignition::msgs::AnnotatedOriented3DBox_V annotated_oriented_3d_box_v_msg;
   ros_gz_bridge::testing::createTestMsg(annotated_oriented_3d_box_v_msg);
 

@@ -85,7 +85,10 @@ def generate_test_description():
           '/pointcloud2@sensor_msgs/msg/PointCloud2@ignition.msgs.PointCloudPacked',
           '/joint_states@sensor_msgs/msg/JointState@ignition.msgs.Model',
           '/battery_state@sensor_msgs/msg/BatteryState@ignition.msgs.BatteryState',
-          '/joint_trajectory@trajectory_msgs/msg/JointTrajectory@ignition.msgs.JointTrajectory'
+          '/joint_trajectory@trajectory_msgs/msg/JointTrajectory@ignition.msgs.JointTrajectory',
+          '/bounding_box_3d@vision_msgs/msg/BoundingBox3D@ignition.msgs.Oriented3DBox',
+          '/detection_3d@vision_msgs/msg/Detection3D@ignition.msgs.AnnotatedOriented3DBox',
+          '/detection_3d_v@vision_msgs/msg/Detection3DArray@ignition.msgs.AnnotatedOriented3DBox_V'
         ],
         output='screen'
     )

@@ -564,7 +564,7 @@ TEST(GzSubscriberTest, VideoRecord)
 
 TEST(GzSubscriberTest, Oriented3DBox)
 {
-  MyTestClass<ignition::msgs::Oriented3DBox> client("oriented_3d_box");
+  MyTestClass<ignition::msgs::Oriented3DBox> client("bounding_box_3d");
 
   using namespace std::chrono_literals;
   ros_gz_bridge::testing::waitUntilBoolVar(
@@ -575,7 +575,7 @@ TEST(GzSubscriberTest, Oriented3DBox)
 
 TEST(GzSubscriberTest, AnnotatedOriented3DBox)
 {
-  MyTestClass<ignition::msgs::AnnotatedOriented3DBox> client("annotated_oriented_3d_box");
+  MyTestClass<ignition::msgs::AnnotatedOriented3DBox> client("detection_3d");
 
   using namespace std::chrono_literals;
   ros_gz_bridge::testing::waitUntilBoolVar(
@@ -586,7 +586,7 @@ TEST(GzSubscriberTest, AnnotatedOriented3DBox)
 
 TEST(GzSubscriberTest, AnnotatedOriented3DBox_V)
 {
-  MyTestClass<ignition::msgs::AnnotatedOriented3DBox_V> client("annotated_oriented_3d_box_v");
+  MyTestClass<ignition::msgs::AnnotatedOriented3DBox_V> client("detection_3d_v");
 
   using namespace std::chrono_literals;
   ros_gz_bridge::testing::waitUntilBoolVar(
