@@ -73,7 +73,7 @@ get_factory__vision_msgs(
       >
     >("vision_msgs/msg/BoundingBox2D", gz_type_name);
   }
-  
+
   if ((ros_type_name == "vision_msgs/msg/Detection2D" || ros_type_name.empty()) &&
     (gz_type_name == "ignition.msgs.AnnotatedAxisAligned2DBox"))
   {
@@ -84,7 +84,7 @@ get_factory__vision_msgs(
       >
     >("vision_msgs/msg/Detection2D", gz_type_name);
   }
-  
+
   if ((ros_type_name == "vision_msgs/msg/Detection2DArray" || ros_type_name.empty()) &&
     (gz_type_name == "ignition.msgs.AnnotatedAxisAligned2DBox_V"))
   {

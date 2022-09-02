@@ -63,6 +63,9 @@
 #include <ignition/msgs/oriented_3d_box.pb.h>
 #include <ignition/msgs/annotated_oriented_3d_box.pb.h>
 #include <ignition/msgs/annotated_oriented_3d_box_v.pb.h>
+#include <ignition/msgs/axis_aligned_2d_box.pb.h>
+#include <ignition/msgs/annotated_axis_aligned_2d_box.pb.h>
+#include <ignition/msgs/annotated_axis_aligned_2d_box_v.pb.h>
 
 #include <memory>
 
@@ -484,6 +487,30 @@ void createTestMsg(ignition::msgs::AnnotatedOriented3DBox_V & _msg);
 /// \brief Compare a message with the populated for testing.
 /// \param[in] _msg The message to compare.
 void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedOriented3DBox_V> & _msg);
+
+/// \brief Create a message used for testing.
+/// \param[out] _msg The message populated.
+void createTestMsg(ignition::msgs::AxisAligned2DBox & _msg);
+
+/// \brief Compare a message with the populated for testing.
+/// \param[in] _msg The message to compare.
+void compareTestMsg(const std::shared_ptr<ignition::msgs::AxisAligned2DBox> & _msg);
+
+/// \brief Create a message used for testing.
+/// \param[out] _msg The message populated.
+void createTestMsg(ignition::msgs::AnnotatedAxisAligned2DBox & _msg);
+
+/// \brief Compare a message with the populated for testing.
+/// \param[in] _msg The message to compare.
+void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedAxisAligned2DBox> & _msg);
+
+/// \brief Create a message used for testing.
+/// \param[out] _msg The message populated.
+void createTestMsg(ignition::msgs::AnnotatedAxisAligned2DBox_V & _msg);
+
+/// \brief Compare a message with the populated for testing.
+/// \param[in] _msg The message to compare.
+void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedAxisAligned2DBox_V> & _msg);
 
 }  // namespace testing
 }  // namespace ros_gz_bridge
