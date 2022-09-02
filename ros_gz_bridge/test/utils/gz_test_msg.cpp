@@ -1434,7 +1434,7 @@ void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedOriented3DBox
 void createTestMsg(ignition::msgs::AnnotatedOriented3DBox_V & _msg)
 {
   createTestMsg(*_msg.mutable_header());
-  for(int i=0; i < 100; i++){
+  for (int i = 0; i < 100; i++) {
     auto annotated_box = _msg.add_annotated_box();
     createTestMsg(*annotated_box);
   }
@@ -1465,10 +1465,44 @@ void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedOriented3DBox
   ignition::msgs::AnnotatedOriented3DBox_V expected_msg;
   createTestMsg(expected_msg);
   ASSERT_EQ(expected_msg.annotated_box_size(), _msg->annotated_box_size());
-  for (auto annotated_box : _msg->annotated_box()){
+  for (auto annotated_box : _msg->annotated_box()) {
     compareTestMsg(std::make_shared<ignition::msgs::AnnotatedOriented3DBox>(annotated_box));
   }
 }
+
+/// \brief Create a message used for testing.
+/// \param[out] _msg The message populated.
+void createTestMsg(ignition::msgs::AxisAligned2DBox & _msg)
+{
+  auto min_corner = _msg.mutable_min_corner();
+  auto max_corner = _msg.mutable_max_corner();
+
+  min_corner->set_x(1);
+  min_corner->set_y(1);
+
+  max_corner->set_x(2);
+  max_corner->set_y(2);
+}
+
+/// \brief Compare a message with the populated for testing.
+/// \param[in] _msg The message to compare.
+void compareTestMsg(const std::shared_ptr<ignition::msgs::AxisAligned2DBox> & _msg);
+
+/// \brief Create a message used for testing.
+/// \param[out] _msg The message populated.
+void createTestMsg(ignition::msgs::AnnotatedAxisAligned2DBox & _msg);
+
+/// \brief Compare a message with the populated for testing.
+/// \param[in] _msg The message to compare.
+void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedAxisAligned2DBox> & _msg);
+
+/// \brief Create a message used for testing.
+/// \param[out] _msg The message populated.
+void createTestMsg(ignition::msgs::AnnotatedAxisAligned2DBox_V & _msg);
+
+/// \brief Compare a message with the populated for testing.
+/// \param[in] _msg The message to compare.
+void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedAxisAligned2DBox_V> & _msg);
 
 }  // namespace testing
 }  // namespace ros_gz_bridge
