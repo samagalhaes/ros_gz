@@ -28,6 +28,7 @@ get_factory__vision_msgs(
   const std::string & ros_type_name,
   const std::string & gz_type_name)
 {
+  // 3D Bounding Boxes
   if ((ros_type_name == "vision_msgs/msg/BoundingBox3D" || ros_type_name.empty()) &&
     (gz_type_name == "ignition.msgs.Oriented3DBox"))
   {
@@ -60,7 +61,41 @@ get_factory__vision_msgs(
       >
     >("vision_msgs/msg/Detection3DArray", gz_type_name);
   }
+
+  // 2D Bounding Boxes
+  if ((ros_type_name == "vision_msgs/msg/BoundingBox2D" || ros_type_name.empty()) &&
+    (gz_type_name == "ignition.msgs.AxisAligned2DBox"))
+  {
+    return std::make_shared<
+      Factory<
+        vision_msgs::msg::BoundingBox2D,
+        ignition::msgs::AxisAligned2DBox
+      >
+    >("vision_msgs/msg/BoundingBox2D", gz_type_name);
+  }
   
+  if ((ros_type_name == "vision_msgs/msg/Detection2D" || ros_type_name.empty()) &&
+    (gz_type_name == "ignition.msgs.AnnotatedAxisAligned2DBox"))
+  {
+    return std::make_shared<
+      Factory<
+        vision_msgs::msg::Detection2D,
+        ignition::msgs::AnnotatedAxisAligned2DBox
+      >
+    >("vision_msgs/msg/Detection2D", gz_type_name);
+  }
+  
+  if ((ros_type_name == "vision_msgs/msg/Detection2DArray" || ros_type_name.empty()) &&
+    (gz_type_name == "ignition.msgs.AnnotatedAxisAligned2DBox_V"))
+  {
+    return std::make_shared<
+      Factory<
+        vision_msgs::msg::Detection2DArray,
+        ignition::msgs::AnnotatedAxisAligned2DBox_V
+      >
+    >("vision_msgs/msg/Detection2DArray", gz_type_name);
+  }
+
   return nullptr;
 }
 
@@ -132,6 +167,80 @@ Factory<
 >::convert_gz_to_ros(
   const ignition::msgs::AnnotatedOriented3DBox_V & gz_msg,
   vision_msgs::msg::Detection3DArray & ros_msg)
+{
+  ros_gz_bridge::convert_gz_to_ros(gz_msg, ros_msg);
+}
+
+// Bounding Box 2D
+
+template<>
+void
+Factory<
+  vision_msgs::msg::BoundingBox2D,
+  ignition::msgs::AxisAligned2DBox
+>::convert_ros_to_gz(
+  const vision_msgs::msg::BoundingBox2D & ros_msg,
+  ignition::msgs::AxisAligned2DBox & gz_msg)
+{
+  ros_gz_bridge::convert_ros_to_gz(ros_msg, gz_msg);
+}
+
+template<>
+void
+Factory<
+  vision_msgs::msg::BoundingBox2D,
+  ignition::msgs::AxisAligned2DBox
+>::convert_gz_to_ros(
+  const ignition::msgs::AxisAligned2DBox & gz_msg,
+  vision_msgs::msg::BoundingBox2D & ros_msg)
+{
+  ros_gz_bridge::convert_gz_to_ros(gz_msg, ros_msg);
+}
+
+template<>
+void
+Factory<
+  vision_msgs::msg::Detection2D,
+  ignition::msgs::AnnotatedAxisAligned2DBox
+>::convert_ros_to_gz(
+  const vision_msgs::msg::Detection2D & ros_msg,
+  ignition::msgs::AnnotatedAxisAligned2DBox & gz_msg)
+{
+  ros_gz_bridge::convert_ros_to_gz(ros_msg, gz_msg);
+}
+
+template<>
+void
+Factory<
+  vision_msgs::msg::Detection2D,
+  ignition::msgs::AnnotatedAxisAligned2DBox
+>::convert_gz_to_ros(
+  const ignition::msgs::AnnotatedAxisAligned2DBox & gz_msg,
+  vision_msgs::msg::Detection2D & ros_msg)
+{
+  ros_gz_bridge::convert_gz_to_ros(gz_msg, ros_msg);
+}
+
+template<>
+void
+Factory<
+  vision_msgs::msg::Detection2DArray,
+  ignition::msgs::AnnotatedAxisAligned2DBox_V
+>::convert_ros_to_gz(
+  const vision_msgs::msg::Detection2DArray & ros_msg,
+  ignition::msgs::AnnotatedAxisAligned2DBox_V & gz_msg)
+{
+  ros_gz_bridge::convert_ros_to_gz(ros_msg, gz_msg);
+}
+
+template<>
+void
+Factory<
+  vision_msgs::msg::Detection2DArray,
+  ignition::msgs::AnnotatedAxisAligned2DBox_V
+>::convert_gz_to_ros(
+  const ignition::msgs::AnnotatedAxisAligned2DBox_V & gz_msg,
+  vision_msgs::msg::Detection2DArray & ros_msg)
 {
   ros_gz_bridge::convert_gz_to_ros(gz_msg, ros_msg);
 }
