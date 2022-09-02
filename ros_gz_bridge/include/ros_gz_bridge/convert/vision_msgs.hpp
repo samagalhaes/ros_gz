@@ -19,11 +19,17 @@
 #include <ignition/msgs/oriented_3d_box.pb.h>
 #include <ignition/msgs/annotated_oriented_3d_box.pb.h>
 #include <ignition/msgs/annotated_oriented_3d_box_v.pb.h>
+#include <ignition/msgs/axis_aligned_2d_box.pb.h>
+#include <ignition/msgs/annotated_axis_aligned_2d_box.pb.h>
+#include <ignition/msgs/annotated_axis_aligned_2d_box_v.pb.h>
 
 // ROS 2 messages
 #include <vision_msgs/msg/bounding_box3_d.hpp>
 #include <vision_msgs/msg/detection3_d.hpp>
 #include <vision_msgs/msg/detection3_d_array.hpp>
+#include <vision_msgs/msg/bounding_box2_d.hpp>
+#include <vision_msgs/msg/detection2_d.hpp>
+#include <vision_msgs/msg/detection2_d_array.hpp>
 
 #include <ros_gz_bridge/convert_decl.hpp>
 
@@ -66,6 +72,42 @@ convert_gz_to_ros(
   const ignition::msgs::AnnotatedOriented3DBox_V & gz_msg,
   vision_msgs::msg::Detection3DArray & ros_msg);
 
+// 2D Bounding Boxes
+template<>
+void
+convert_ros_to_gz(
+  const vision_msgs::msg::BoundingBox2D & ros_msg,
+  ignition::msgs::AxisAligned2DBox & gz_msg);
+
+template<>
+void
+convert_gz_to_ros(
+  const ignition::msgs::AxisAligned2DBox & gz_msg,
+  vision_msgs::msg::BoundingBox2D & ros_msg);
+
+template<>
+void
+convert_ros_to_gz(
+  const vision_msgs::msg::Detection2D & ros_msg,
+  ignition::msgs::AnnotatedAxisAligned2DBox & gz_msg);
+
+template<>
+void
+convert_gz_to_ros(
+  const ignition::msgs::AnnotatedAxisAligned2DBox & gz_msg,
+  vision_msgs::msg::Detection2D & ros_msg);
+
+template<>
+void
+convert_ros_to_gz(
+  const vision_msgs::msg::Detection2DArray & ros_msg,
+  ignition::msgs::AnnotatedAxisAligned2DBox_V & gz_msg);
+
+template<>
+void
+convert_gz_to_ros(
+  const ignition::msgs::AnnotatedAxisAligned2DBox_V & gz_msg,
+  vision_msgs::msg::Detection2DArray & ros_msg);
 
 }  // namespace ros_gz_bridge
 

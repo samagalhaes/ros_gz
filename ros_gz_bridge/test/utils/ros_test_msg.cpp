@@ -1240,7 +1240,7 @@ void createTestMsg(vision_msgs::msg::Detection3DArray & _msg)
 void compareTestMsg(const std::shared_ptr<vision_msgs::msg::Detection3DArray> & _msg)
 {
   compareTestMsg(_msg->header);
-  
+
   vision_msgs::msg::Detection3DArray expected_msg;
   createTestMsg(expected_msg);
 
