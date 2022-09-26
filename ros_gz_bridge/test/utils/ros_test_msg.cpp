@@ -1246,5 +1246,60 @@ void compareTestMsg(const std::shared_ptr<vision_msgs::msg::Detection3DArray> & 
   }
 }
 
+void createTestMsg(vision_msgs::msg::BoundingBox2D & _msg)
+{
+  // createTestMsg(_msg.center);
+  // createTestMsg(_msg.size);
+}
+
+void compareTestMsg(const std::shared_ptr<vision_msgs::msg::BoundingBox2D> & _msg)
+{
+  // compareTestMsg(_msg->center);
+  // compareTestMsg(std::make_shared<geometry_msgs::msg::Vector3>(_msg->size));
+}
+
+void createTestMsg(vision_msgs::msg::Detection2D & _msg)
+{
+  // createTestMsg(_msg.header);
+  // auto & result = _msg.results.emplace_back();
+  // result.hypothesis.class_id = std::to_string(31);
+  // result.hypothesis.score = 1.0;
+  // createTestMsg(_msg.bbox);
+}
+
+void compareTestMsg(const std::shared_ptr<vision_msgs::msg::Detection2D> & _msg)
+{
+  // compareTestMsg(_msg->header);
+  // compareTestMsg(std::make_shared<vision_msgs::msg::BoundingBox3D>(_msg->bbox));
+
+  // vision_msgs::msg::Detection3D expected_msg;
+  // createTestMsg(expected_msg);
+
+  // EXPECT_EQ(_msg->results[0].hypothesis.class_id, expected_msg.results[0].hypothesis.class_id);
+  // EXPECT_EQ(_msg->results[0].hypothesis.score, expected_msg.results[0].hypothesis.score);
+}
+
+void createTestMsg(vision_msgs::msg::Detection2DArray & _msg)
+{
+  // createTestMsg(_msg.header);
+  // for (int i = 0; i < 100; i++) {
+  //   auto & detection = _msg.detections.emplace_back();
+  //   createTestMsg(detection);
+  // }
+}
+
+void compareTestMsg(const std::shared_ptr<vision_msgs::msg::Detection2DArray> & _msg)
+{
+  // compareTestMsg(_msg->header);
+
+  // vision_msgs::msg::Detection3DArray expected_msg;
+  // createTestMsg(expected_msg);
+
+  // ASSERT_EQ(expected_msg.detections.size(), _msg->detections.size());
+  // for (auto detection : expected_msg.detections) {
+  //   compareTestMsg(std::make_shared<vision_msgs::msg::Detection3D>(detection));
+  // }
+}
+
 }  // namespace testing
 }  // namespace ros_gz_bridge
