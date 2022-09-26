@@ -55,6 +55,12 @@ The following message types can be bridged for topics:
 | sensor_msgs/msg/PointCloud2          | ignition::msgs::PointCloudPacked       |
 | tf2_msgs/msg/TFMessage               | ignition::msgs::Pose_V                 |
 | trajectory_msgs/msg/JointTrajectory  | ignition::msgs::JointTrajectory        |
+| vision_msgs/msg/BoundingBox3D        | ignition::msgs::Oriented3DBox          |
+| vision_msgs/msg/Detection3D        | ignition::msgs::AnnotatedOriented3DBox |
+| vision_msgs/msg/Detection3DArray        | ignition::msgs::AnnotatedOriented3DBox_V |
+| vision_msgs/msg/BoundingBox2D        | ignition::msgs::AxisAligned2DBox          |
+| vision_msgs/msg/Detection2D        | ignition::msgs::AnnotatedAxisAligned2DBox |
+| vision_msgs/msg/Detection2DArray        | ignition::msgs::AnnotatedAxisAligned2DBox_V |
 
 And the following for services:
 

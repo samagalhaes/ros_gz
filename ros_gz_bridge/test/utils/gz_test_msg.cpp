@@ -1486,23 +1486,28 @@ void createTestMsg(ignition::msgs::AxisAligned2DBox & _msg)
 
 /// \brief Compare a message with the populated for testing.
 /// \param[in] _msg The message to compare.
-void compareTestMsg(const std::shared_ptr<ignition::msgs::AxisAligned2DBox> & _msg);
+void compareTestMsg(const std::shared_ptr<ignition::msgs::AxisAligned2DBox> & _msg)
+{}
 
 /// \brief Create a message used for testing.
 /// \param[out] _msg The message populated.
-void createTestMsg(ignition::msgs::AnnotatedAxisAligned2DBox & _msg);
+void createTestMsg(ignition::msgs::AnnotatedAxisAligned2DBox & _msg)
+{}
 
 /// \brief Compare a message with the populated for testing.
 /// \param[in] _msg The message to compare.
-void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedAxisAligned2DBox> & _msg);
+void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedAxisAligned2DBox> & _msg)
+{}
 
 /// \brief Create a message used for testing.
 /// \param[out] _msg The message populated.
-void createTestMsg(ignition::msgs::AnnotatedAxisAligned2DBox_V & _msg);
+void createTestMsg(ignition::msgs::AnnotatedAxisAligned2DBox_V & _msg)
+{}
 
 /// \brief Compare a message with the populated for testing.
 /// \param[in] _msg The message to compare.
-void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedAxisAligned2DBox_V> & _msg);
+void compareTestMsg(const std::shared_ptr<ignition::msgs::AnnotatedAxisAligned2DBox_V> & _msg)
+{}
 
 }  // namespace testing
 }  // namespace ros_gz_bridge

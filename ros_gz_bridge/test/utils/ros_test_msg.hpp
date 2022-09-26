@@ -72,6 +72,9 @@
 #include <vision_msgs/msg/bounding_box3_d.hpp>
 #include <vision_msgs/msg/detection3_d.hpp>
 #include <vision_msgs/msg/detection3_d_array.hpp>
+#include <vision_msgs/msg/bounding_box2_d.hpp>
+#include <vision_msgs/msg/detection2_d.hpp>
+#include <vision_msgs/msg/detection2_d_array.hpp>
 
 namespace ros_gz_bridge
 {
@@ -535,6 +538,30 @@ void createTestMsg(vision_msgs::msg::Detection3DArray & _msg);
 /// \brief Compare a message with the populated for testing.
 /// \param[in] _msg The message to compare.
 void compareTestMsg(const std::shared_ptr<vision_msgs::msg::Detection3DArray> & _msg);
+
+/// \brief Create a message used for testing.
+/// \param[out] _msg The message populated.
+void createTestMsg(vision_msgs::msg::BoundingBox2D & _msg);
+
+/// \brief Compare a message with the populated for testing.
+/// \param[in] _msg The message to compare.
+void compareTestMsg(const std::shared_ptr<vision_msgs::msg::BoundingBox2D> & _msg);
+
+/// \brief Create a message used for testing.
+/// \param[out] _msg The message populated.
+void createTestMsg(vision_msgs::msg::Detection2D & _msg);
+
+/// \brief Compare a message with the populated for testing.
+/// \param[in] _msg The message to compare.
+void compareTestMsg(const std::shared_ptr<vision_msgs::msg::Detection2D> & _msg);
+
+/// \brief Create a message used for testing.
+/// \param[out] _msg The message populated.
+void createTestMsg(vision_msgs::msg::Detection2DArray & _msg);
+
+/// \brief Compare a message with the populated for testing.
+/// \param[in] _msg The message to compare.
+void compareTestMsg(const std::shared_ptr<vision_msgs::msg::Detection2DArray> & _msg);
 
 }  // namespace testing
 }  // namespace ros_gz_bridge

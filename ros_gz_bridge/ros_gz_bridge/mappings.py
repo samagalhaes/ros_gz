@@ -92,6 +92,14 @@ MAPPINGS = {
     'trajectory_msgs': [
         Mapping('JointTrajectory', 'JointTrajectory'),
     ],
+    'vision_msgs': [
+        Mapping('BoundingBox3D', 'Oriented3DBox'),
+        Mapping('Detection3D', 'AnnotatedOriented3DBox'),
+        Mapping('Detection3DArray', 'AnnotatedOriented3DBox_V'),
+        Mapping('BoundingBox2D', 'AxisAligned2DBox'),
+        Mapping('Detection2D', 'AnnotatedAxisAligned2DBox'),
+        Mapping('Detection2DArray', 'AnnotatedAxisAligned2DBox_V'),
+    ],
 }
 
 MAPPINGS_8_4_0 = {
