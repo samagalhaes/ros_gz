@@ -30,6 +30,7 @@ MAPPINGS = {
     'geometry_msgs': [
         Mapping('Point', 'Vector3d'),
         Mapping('Pose', 'Pose'),
+        Mapping('PoseArray', 'Pose_V'),
         Mapping('PoseStamped', 'Pose'),
         Mapping('PoseWithCovariance', 'PoseWithCovariance'),
         Mapping('Quaternion', 'Quaternion'),
@@ -50,7 +51,9 @@ MAPPINGS = {
     'ros_gz_interfaces': [
         Mapping('Contact', 'Contact'),
         Mapping('Contacts', 'Contacts'),
+        Mapping('Dataframe', 'Dataframe'),
         Mapping('Entity', 'Entity'),
+        Mapping('Float32Array', 'Float_V'),
         Mapping('GuiCamera', 'GUICamera'),
         Mapping('JointWrench', 'JointWrench'),
         Mapping('Light', 'Light'),
@@ -99,11 +102,5 @@ MAPPINGS = {
         Mapping('BoundingBox2D', 'AxisAligned2DBox'),
         Mapping('Detection2D', 'AnnotatedAxisAligned2DBox'),
         Mapping('Detection2DArray', 'AnnotatedAxisAligned2DBox_V'),
-    ],
-}
-
-MAPPINGS_8_4_0 = {
-    'ros_gz_interfaces': [
-        Mapping('Dataframe', 'Dataframe'),
     ],
 }
