@@ -34,11 +34,27 @@ if("$ENV{GZ_VERSION}" STREQUAL "garden")
   set(GZ_TARGET_PREFIX gz)
 
   message(STATUS "Compiling against Gazebo Garden")
+elseif("$ENV{GZ_VERSION}" STREQUAL "harmonic")
+  find_package(gz-math7 REQUIRED)
+  set(GZ_MATH_VER ${gz-math7_VERSION_MAJOR})
+
+  find_package(gz-transport13 REQUIRED)
+  set(GZ_TRANSPORT_VER ${gz-transport13_VERSION_MAJOR})
+
+  find_package(gz-msgs10 REQUIRED)
+  set(GZ_MSGS_VER ${gz-msgs10_VERSION_MAJOR})
+
+  find_package(gz-sim8 REQUIRED)
+  set(GZ_SIM_VER ${gz-sim8_VERSION_MAJOR})
+
+  set(GZ_TARGET_PREFIX gz)
+
+  message(STATUS "Compiling against Gazebo Harmonic")
 else()
   message(FATAL_ERROR "This branch is only compatible with Gazebo Garden forward.")
 endif()
 
-ign_find_package(gflags
+gz_find_package(gflags
     REQUIRED
     PKGCONFIG gflags)
 find_package(std_msgs REQUIRED)
@@ -56,12 +72,12 @@ target_link_libraries(create
 )
 ament_target_dependencies(create std_msgs)
 
-add_library(Stopwatch src/Stopwatch.cpp)
-ament_target_dependencies(Stopwatch
+add_library(${PROJECT_NAME} SHARED src/Stopwatch.cpp)
+ament_target_dependencies(${PROJECT_NAME}
   rclcpp
 )
 
-target_include_directories(Stopwatch PUBLIC
+target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
@@ -87,9 +103,19 @@ install(FILES
 
 install(TARGETS
   create
-  Stopwatch
   DESTINATION lib/${PROJECT_NAME}
 )
+
+install(
+  TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+)
+
+ament_export_targets(${PROJECT_NAME})
+
+ament_export_dependencies(rclcpp)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -111,7 +137,7 @@ if(BUILD_TESTING)
   )
 
   target_link_libraries(test_stopwatch
-    Stopwatch
+    ${PROJECT_NAME}
   )
 
   install(
@@ -119,7 +145,6 @@ if(BUILD_TESTING)
     DESTINATION lib/${PROJECT_NAME}
   )
   ament_add_gtest_test(test_stopwatch)
-
 endif()
 
 ament_package()

@@ -1,4 +1,4 @@
-# Copyright 2019 Open Source Robotics Foundation, Inc.
+# Copyright 2022 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,8 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-"""Launch Gazebo Sim with command line arguments."""
 
 import os
 
@@ -32,19 +30,12 @@ def generate_launch_description():
 
     pkg_ros_gz_sim = get_package_share_directory('ros_gz_sim')
 
-    # Bridge
-    bridge = Node(
-        package='ros_gz_bridge',
-        executable='parameter_bridge',
-        arguments=['/air_pressure@sensor_msgs/msg/FluidPressure@gz.msgs.FluidPressure'],
-        parameters=[{'qos_overrides./air_pressure.publisher.reliability': 'best_effort'}],
-        output='screen'
-    )
-
     gz_sim = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')),
-        launch_arguments={'gz_args': '-r sensors.sdf'}.items(),
+        launch_arguments={
+            'gz_args': '-v 4 -r spherical_coordinates.sdf'
+        }.items(),
     )
 
     # RQt
@@ -54,6 +45,15 @@ def generate_launch_description():
         arguments=['-t'],
         condition=IfCondition(LaunchConfiguration('rqt'))
     )
+
+    # Bridge
+    bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/navsat@gps_msgs/msg/GPSFix@gz.msgs.NavSat'],
+        output='screen'
+    )
+
     return LaunchDescription([
         gz_sim,
         DeclareLaunchArgument('rqt', default_value='true',
